@@ -1,0 +1,31 @@
+﻿@using Aplication.ViewModel;
+@model List<ProductoraViewModel>;
+@{
+    ViewData["Title"] = "List Productora";
+}
+<div class="row mb-3">
+    <h1 class="text-white mt-2">Mantenimiento de Productora</h1>
+    <div class="col-3">
+        <a asp-controller="Productora" asp-action="CreateP" class="btn btn-outline-success">Crear nueva productora</a>
+    </div>
+</div>
+
+<ul class="list-group mt-4">
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="mt-4 alert alert-info">No hay Productoras disponibles</div>
+    }
+    else
+    {
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item mb-1 d-flex justify-content-between align-items-center">
+                @item.NombreProductora
+                <div>
+                    <a asp-controller="Productora" asp-action="EditP" asp-route-id="@item.IdProductora" class="btn btn-primary btn-sm">Editar</a>
+                    <a asp-controller="Productora" asp-action="DeleteP" class="btn btn-sm btn-danger" asp-route-id="@item.IdProductora" btn-sm">Eliminar</a>
+                </div>
+            </li>
+        }
+    }
+</ul>

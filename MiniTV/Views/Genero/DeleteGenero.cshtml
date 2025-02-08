@@ -1,0 +1,17 @@
+﻿@model Aplication.ViewModel.GenerosViewModel
+@{
+    ViewData["Title"] = "Eliminar Género";
+}
+
+<div class="text-white mt-4 text-center container">
+
+    <form asp-controller="Genero" asp-action="DeleteG" method="POST">
+        <input type="hidden" name="id" value="@Model.IdGenero" />
+        <p>¿Está seguro que desea eliminar el género <strong>@Model.NombreGenero</strong>?</p>
+
+        <button type="submit" class="btn btn-danger">Aceptar</button>
+        <a asp-controller="Genero" asp-action="ListGenero" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+
+</div>    

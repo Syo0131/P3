@@ -1,0 +1,32 @@
+﻿@using Aplication.ViewModel;
+@model List<GenerosViewModel>
+@{
+    ViewData["Title"] = "Lista Género";
+}
+
+
+<div class="row mb-3">
+    <h1 class="text-white mt-2">Mantenimiento de Genero</h1>
+    <div class="col3 ">
+
+        <a asp-controller="Genero" asp-action="CreateG" class="btn btn-outline-success">Crear nuevo Genero</a>
+    </div>
+</div>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+
+        <li class="list-group-item d-flex mb-1 justify-content-between align-items-center">
+            @item.NombreGenero
+            <div>
+                <a asp-controller="Genero" asp-action="EditG" asp-route-id="@item.IdGenero" class="btn btn-primary btn-sm">Editar</a>
+
+                <a asp-controller="Genero" asp-action="DeleteG" asp-route-id="@item.IdGenero" class="btn btn-danger btn-sm">Eliminar</a>
+                
+            </div>
+        </li>
+    }
+</ul>
+
+

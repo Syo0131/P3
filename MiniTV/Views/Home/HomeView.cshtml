@@ -1,0 +1,76 @@
+﻿@using Aplication.ViewModel;
+@model List<SeriesViewModel>
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+<link rel="stylesheet" href="~/css/homeview.css" asp-append-version="true" />
+<div class="container">
+    <h2 class="text-center mb-4">Listado de Series</h2>
+
+    <!-- 🔍 Formulario de búsqueda y filtros -->
+    <form asp-controller="Home" asp-action="HomeView" method="get" class="mb-4">
+        <div class="row">
+            <!-- Búsqueda por título -->
+            <div class="col-md-4">
+                <input type="text" name="search" class="form-control" placeholder="Buscar por título..." value="@Context.Request.Query["search"]">
+            </div>
+
+            <!-- Filtro por Productora -->
+            <div class="col-md-3">
+                <select name="productoraId" class="form-control">
+                    <option value="">Todas las Productoras</option>
+                    @foreach (var productora in ViewBag.Productoras)
+                    {
+                        <option value="@productora.IdProductora" selected="@(Context.Request.Query["productoraId"] == productora.IdProductora.ToString())">
+                            @productora.NombreProductora
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <!-- Filtro por Género -->
+            <div class="col-md-3">
+                <select name="generoId" class="form-control">
+                    <option value="">Todos los Géneros</option>
+                    @foreach (var genero in ViewBag.Generos)
+                    {
+                        <option value="@genero.IdGenero" selected="@(Context.Request.Query["generoId"] == genero.IdGenero.ToString())">
+                            @genero.NombreGenero
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <!-- Botón de Filtrar -->
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <div class="mt-4 alert alert-info">No hay series disponibles</div>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mt-4 col-sm-6">
+                    <div class="img-container">
+                        <img src="@item.PortadaUrl" alt="@item.Titulo" class="img-fluid">
+                        <div class="img-overlay">
+                            <p>Titulo: <strong>@item.Titulo</strong></p>
+                            <p>Productora: @item.NombreProductora</p>
+                            <p>Género: @item.NombreGeneroPrimario@(string.IsNullOrEmpty(item.NombreGeneroSecundario) ? "" : $", {item.NombreGeneroSecundario}")</p>
+
+                        </div>
+                    </div>
+                    <a asp-controller="Series" asp-action="DetailS" asp-route-id="@item.Id" class="btn btn-primary mb-4 w-100">Detalles</a>
+                </div>
+            }
+        }
+    </div>
+</div>

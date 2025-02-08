@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Crear Productora";
+}
+
+<h1 class="text-white">Crear Nueva Productora</h1>
+<form asp-controller="Productora" asp-action="CreateP" method="post">
+    <div class="mb-3">
+        <label>Nombre de la productora</label>
+        <input type="text" name="NombreProductora" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear Productora</button>
+    <a asp-controller="Productora" asp-action="ListProductora" class="btn btn-secondary">Volver</a>
+</form>

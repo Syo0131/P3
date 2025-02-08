@@ -1,0 +1,76 @@
+﻿@model Aplication.ViewModel.SeriesViewModel
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <h1>Editar Serie</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Series" asp-action="EditS">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="Titulo" class="form-label">Nombre de la Serie:</label>
+                            <input type="text" asp-for="Titulo" class="form-control" />
+                            <span asp-validation-for="Titulo" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PortadaUrl" class="form-label">URL de la Imagen:</label>
+                            <input type="text" asp-for="PortadaUrl" class="form-control" />
+                            <span asp-validation-for="PortadaUrl" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="VideoURl" class="form-label">Enlace al Video:</label>
+                            <input type="text" asp-for="VideoURl" class="form-control" />
+                            <span asp-validation-for="VideoURl" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdProductora" class="form-label">Productora:</label>
+                            <select asp-for="IdProductora" class="form-select">
+                                <option value="">Seleccione una opción</option>
+                                @foreach (var productora in ViewBag.Productoras)
+                                {
+                                    <option value="@productora.IdProductora">@productora.NombreProductora</option>
+                                }
+                            </select>
+                            <span asp-validation-for="IdProductora" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdGeneroPrimario" class="form-label">Género Primario:</label>
+                            <select asp-for="IdGeneroPrimario" class="form-select">
+                                <option value="">Seleccione una opción</option>
+                                @foreach (var genero in ViewBag.Generos)
+                                {
+                                    <option value="@genero.IdGenero">@genero.NombreGenero</option>
+                                }
+                            </select>
+                            <span asp-validation-for="IdGeneroPrimario" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdGeneroSecundario" class="form-label">Género Secundario (Opcional):</label>
+                            <select asp-for="IdGeneroSecundario" class="form-select">
+                                <option value="">Seleccione una opción</option>
+                                @foreach (var genero in ViewBag.Generos)
+                                {
+                                    <option value="@genero.IdGenero">@genero.NombreGenero</option>
+                                }
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a asp-controller="Series" asp-action="ListSerie" class="btn btn-warning">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

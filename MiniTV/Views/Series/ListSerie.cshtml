@@ -1,0 +1,41 @@
+﻿@using Aplication.ViewModel;
+@model List<SeriesViewModel>
+
+@{
+    ViewData["Title"] = "List Séries";
+}
+
+
+<link rel="stylesheet" href="~/css/homeview.css" asp-append-version="true" />
+
+
+<h1>Mantenimiento de Series</h1>
+
+<a asp-controller="Series" asp-action="CreateS" class="btn btn-success mb-4">Crear Nueva Serie</a>
+
+<div class="container">
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <div class="mt-4 alert alert-info">No hay series disponibles</div>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mt-4 col-sm-6">
+                    <div class="img-container">
+                        <img src="@item.PortadaUrl" alt="@item.Titulo" class="img-fluid">
+                        <div class="img-overlay">
+                            <p>Titulo: <strong>@item.Titulo</strong></p>
+                            <p>Productora: @item.NombreProductora</p>
+                            <p>Género: @item.NombreGeneroPrimario@(string.IsNullOrEmpty(item.NombreGeneroSecundario) ? "": $", {item.NombreGeneroSecundario}")</p>
+
+                        </div>
+                    </div>
+                    <a asp-controller="Series" asp-action="DetailS" asp-route-id="@item.Id" class="btn btn-primary mb-4 w-100">Detalles</a>
+                </div>
+            }
+        }
+    </div>
+</div>

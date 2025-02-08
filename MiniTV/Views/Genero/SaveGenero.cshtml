@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Save Genero";
+}
+<h1 class="text-white">Crear Nuevo Género</h1>
+<form asp-controller="Genero" asp-action="CreateG" method="post">
+    <div class="mb-3">
+        <label>Nombre del Género</label>
+        <input type="text" name="NombreGenero" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear Género</button>
+    <a asp-controller="Genero" asp-action="ListGenero" class="btn btn-secondary">Volver</a>
+</form>

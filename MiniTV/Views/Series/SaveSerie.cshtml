@@ -1,0 +1,76 @@
+﻿@model Aplication.ViewModel.SeriesViewModel
+
+@{
+    ViewData["Title"] = "Agregar Nueva Serie";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <h1>Agrega una serie</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Series" asp-action="CreateS">
+                        <div class="mb-3">
+                            <label name="Titulo" class="form-label">Nombre de la Serie: </label>
+                            <input type="text" name="Titulo" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label name="PortadaUrl" class="form-label">URL de la Imagen: </label>
+                            <input type="text" name="PortadaUrl" class="form-control" />                            
+                        </div>
+
+                        <div class="mb-3">
+                            <label name="VideoURl" class="form-label">Enlace al Video: </label>
+                            <input type="text" name="VideoURl" class="form-control" />
+                            <span asp-validation-for="VideoURl" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label name="IdProductora" class="form-label">Productora: </label>
+                            <select name="IdProductora" class="form-select">
+                                <option value="">Seleccione una opción</option>
+                                @foreach (var productora in ViewBag.Productoras)
+                                {
+                                    <option value="@productora.IdProductora">@productora.NombreProductora</option>
+                                }
+                            </select>
+                            <span asp-validation-for="IdProductora" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label name="IdGeneroPrimario" class="form-label">Género Primario: </label>
+                            <select name="IdGeneroPrimario" class="form-select">
+                                <option value="">Seleccione una opción</option>
+                                @foreach (var genero in ViewBag.Generos)
+                                {
+                                    <option value="@genero.IdGenero">@genero.NombreGenero</option> 
+                                }
+                            </select>
+                            <span asp-validation-for="IdGeneroPrimario" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label name="IdGeneroSecundario" class="form-label">Género Secundario (Opcional): </label>
+                            <select name="IdGeneroSecundario" class="form-select">
+                                <option value="">Seleccione una opción</option>
+                                @foreach (var genero in ViewBag.Generos)
+                                {
+                                    <option value="@genero.IdGenero">@genero.NombreGenero</option> 
+                                }
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="Id" />
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a asp-controller="Series" asp-action="ListSerie" class="btn btn-warning">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
